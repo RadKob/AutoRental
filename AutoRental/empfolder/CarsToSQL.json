@@ -1,0 +1,12 @@
+[
+{"CarNo":"test001","TheBrand":"Volvo","TheModel":"Civic","Year":2009,"Mileage":"123.900km","Status":"rental"},
+{"CarNo":"test002","TheBrand":"Volvo","TheModel":"Civic","Year":2009,"Mileage":"123.900km","Status":"available"},
+{"CarNo":"test003","TheBrand":"Volvo","TheModel":"Civic","Year":2009,"Mileage":"123.900km","Status":"available"},
+{"CarNo":"test004","TheBrand":"Volvo","TheModel":"Civic","Year":2009,"Mileage":"123.900km","Status":"available"},
+{"CarNo":"test005","TheBrand":"Volvo","TheModel":"Civic","Year":2009,"Mileage":"123.900km","Status":"available"},
+{"CarNo":"test006","TheBrand":"Volvo","TheModel":"Civic","Year":2009,"Mileage":"123.900km","Status":"rental"},
+{"CarNo":"test007","TheBrand":"Volvo","TheModel":"Civic","Year":2009,"Mileage":"123.900km","Status":"rental"},
+{"CarNo":"test008","TheBrand":"Volvo","TheModel":"Civic","Year":2009,"Mileage":"123.900km","Status":"rental"},
+{"CarNo":"test009","TheBrand":"Volvo","TheModel":"Civic","Year":2009,"Mileage":"123.900km","Status":"available"},
+{"CarNo":"test010","TheBrand":"Volvo","TheModel":"Civic","Year":2009,"Mileage":"123.900km","Status":"available"}
+]

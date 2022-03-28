@@ -1,0 +1,182 @@
+﻿@model IEnumerable<AutoRental.Models.RentalView>
+<div class="row">
+    <div class="col-sm-4">
+        @using (Html.BeginForm("Save", "Rental", FormMethod.Post, new { id = "popupForm" }))
+        {
+            <div>
+                <h2>Rentails</h2>
+            </div>
+
+            <div>
+                <div class="form-group">
+                    <label class="form-label">CarNo</label>
+                    <select class="form-control" id="carno" name="carno" placeholder="CarNo" required>
+                        <option>Select car</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">IDPerson</label>
+                    <input type="text" id="idperson" name="idperson" class="form-control" placeholder="IDPerson" required />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Name" required />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Price for day</label>
+                    <input type="text" id="price" name="price" class="form-control" placeholder="Price" required />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" id="startdate" name="startdate" class="form-control" placeholder="StartDate" required />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">End Date</label>
+                    <input type="date" id="enddate" name="enddate" class="form-control" placeholder="EndDate" required />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-sm-8">
+        <table class="table">
+            <tr>
+                <th><center>CarNo</center></th>
+
+                <th><center>Name</center></th>
+
+                <th><center>Surname</center></th>
+
+                <th><center>Price per day</center></th>
+
+                <th><center>Start date</center></th>
+
+                <th><center>End date</center></th>
+
+                <th><center>Status</center></th>
+            </tr>
+
+            @foreach(var item in Model)
+            {
+        <tr>
+            <td><center>@item.CarNo</center></td>
+            <td><center>@item.Name</center></td>
+            <td><center>@item.Surname</center></td>
+            <td><center>@item.Price</center></td>
+            <td><center>@item.StartDate</center></td>
+            <td><center>@item.EndDate</center></td>
+            @if (item.Status == "available")
+            {
+                <td style="background-color: lightgreen">
+                    <!--<center>@item.Status</center>-->
+                </td>
+            }
+            else
+            {
+                <td style="background-color: lightcoral">
+                    <!--<center>@item.Status</center>-->
+                </td>
+            }
+            <td>
+                @Html.ActionLink("Download", "Download", new { id = item.IDRental })
+            </td>
+        </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script>
+        getCar();
+        load();
+
+        function load()
+        {
+            $("#idperson").attr("disabled", "disabled");
+            $("#name").attr("disabled", "disabled");
+            $("#price").attr("disabled", "disabled");
+            $("#startdate").attr("disabled", "disabled");
+            $("#enddate").attr("disabled", "disabled");
+        }
+
+        function getCar()
+        {
+            $.ajax({
+                type: 'GET',
+                url: '/Rental/GetCar',
+                dataType: 'JSON',
+                success: function (data)
+                {
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        $("#carno").append($("<option/>", {
+                               text: data[i].CarNo
+                        }));
+                    }
+                }
+            });
+        }
+        $("#carno").change(function ()
+        {
+            status();
+        });
+        function status()
+        {
+            $.ajax({
+                type: 'POST',
+                url: '/Rental/Getstatus?carno=' + $("#carno").val(),
+                dataType: 'JSON',
+                success: function (data) {
+                    console.log(data)
+                    var status = data;
+                    if (status == "available")
+                    {
+                        $("#idperson").removeAttr('disabled');
+                        $("#name").removeAttr('disabled');
+                        $("#price").removeAttr('disabled');
+                        $("#startdate").removeAttr('disabled');
+                        $("#enddate").removeAttr('disabled');
+                    }
+                    else
+                    {
+                        $("#idperson").attr("disabled", "disabled");
+                        $("#name").attr("disabled", "disabled");
+                        $("#price").attr("disabled", "disabled");
+                        $("#startdate").attr("disabled", "disabled");
+                        $("#enddate").attr("disabled", "disabled");
+                    }
+                }
+            });
+        }
+        getCustomer();
+        function getCustomer()
+        {
+            $("#idperson").keyup(function (e) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Rental/Getid?id=' + $("#idperson").val(),
+                    dataType: 'JSON',
+                    success: function (data) {
+                        console.log(data)
+                        $("#name").val(data)
+                    }
+                });
+            });
+        }
+    </script>
+}
+

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<AutoRental.Models.Car>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<center>
+    <h2>My cars</h2>
+
+    <p>
+        @Html.ActionLink("Create New Car", "Create")
+    </p>
+    <p>
+        <center>
+            @using (Html.BeginForm("uploadCarFromJson","Car", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="file" id="JSONFile" name="filejson" />
+                <input type="submit" value="Save" />
+            }
+        </center>
+    </p>
+    
+    @using (Html.BeginForm("Index","Car", FormMethod.Get))
+    {
+        @Html.TextBox("search")
+        <select name="type">
+            <option>Brand</option>
+            <option>Model</option>
+        </select>
+        <input type="submit" value="Search" class="btn btn-danger"/>
+    }
+</center>
+<table class="table">
+    <tr>
+        <th style="background-color: darkgray;">
+            <center>@Html.DisplayNameFor(model => model.CarNo)</center>
+        </th>
+        <th>
+            <center>@Html.DisplayNameFor(model => model.TheBrand)</center>
+        </th>
+        <th style="background-color: darkgray;">
+            <center>@Html.DisplayNameFor(model => model.TheModel)</center>
+        </th>
+        <th>
+            <center>@Html.DisplayNameFor(model => model.Year)</center>
+        </th>
+        <th style="background-color: darkgray;">
+            <center>@Html.DisplayNameFor(model => model.Mileage)</center>
+        </th>
+        <th>
+            <center>@Html.DisplayNameFor(model => model.Status)</center>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+
+<tr>
+    <td>
+        <center>@Html.DisplayFor(modelItem => item.CarNo)</center>
+    </td>
+    <td style="background-color: darkgray;">
+        <center>@Html.DisplayFor(modelItem => item.TheBrand)</center>
+    </td>
+    <td>
+        <center>@Html.DisplayFor(modelItem => item.TheModel)</center>
+    </td>
+    <td style="background-color: darkgray;">
+        <center>@Html.DisplayFor(modelItem => item.Year)</center>
+    </td>
+    <td>
+        <center>@Html.DisplayFor(modelItem => item.Mileage)</center>
+    </td>
+    @if (item.Status == "available")
+    {
+        <td style="background-color: lightgreen;">
+            <!--<center>@Html.DisplayFor(modelItem => item.Status)</center>-->
+        </td>
+    }
+    else
+    {
+        <td style="background-color: lightcoral;">
+            <!--<center>@Html.DisplayFor(modelItem => item.Status)</center>-->
+        </td>
+    }
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.IDCar }) |
+        @Html.ActionLink("Details", "Details", new { id = item.IDCar }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.IDCar })
+    </td>
+</tr>
+}
+</table>
+<p>
+    <center>
+        @Html.ActionLink("Create Json file", "CreateJSON")
+    </center>
+</p>

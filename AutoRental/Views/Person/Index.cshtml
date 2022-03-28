@@ -1,0 +1,73 @@
+﻿@model IEnumerable<AutoRental.Models.Person>
+
+@{
+    ViewBag.Title = "Index";
+}
+<center>
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    @using (Html.BeginForm("Index", "Person", FormMethod.Get))
+    {
+        @Html.TextBox("search")
+        <select name="type">
+            <option>Surname</option>
+            <option>Email</option>
+        </select>
+        <input type="submit" value="Search" class="btn btn-danger" />
+    }
+</center>
+<table class="table">
+    <tr>
+        <th style="background-color: darkgray;">
+            <center>@Html.DisplayNameFor(model => model.IDPerson)</center>
+        </th>
+        <th>
+            <center>@Html.DisplayNameFor(model => model.Name)</center>
+        </th>
+        <th style="background-color: darkgray;">
+            <center>@Html.DisplayNameFor(model => model.Surname)</center>
+        </th>
+        <th>
+            <center>@Html.DisplayNameFor(model => model.Adress)</center>
+        </th>
+        <th style="background-color: darkgray;">
+            <center>@Html.DisplayNameFor(model => model.Phone)</center>
+        </th>
+        <th>
+            <center>@Html.DisplayNameFor(model => model.Email)</center>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        <center>@Html.DisplayFor(modelItem => item.IDPerson)</center>
+    </td>
+    <td style="background-color: darkgray;">
+        <center>@Html.DisplayFor(modelItem => item.Name)</center>
+    </td>
+    <td>
+        <center>@Html.DisplayFor(modelItem => item.Surname)</center>
+    </td>
+    <td style="background-color: darkgray;">
+        <center>@Html.DisplayFor(modelItem => item.Adress)</center>
+    </td>
+    <td>
+        <center>@Html.DisplayFor(modelItem => item.Phone)</center>
+    </td>
+    <td style="background-color: darkgray;">
+        <center>@Html.DisplayFor(modelItem => item.Email)</center>
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.IDPerson }) |
+        @Html.ActionLink("Details", "Details", new { id = item.IDPerson }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.IDPerson })
+    </td>
+</tr>
+}
+
+</table>

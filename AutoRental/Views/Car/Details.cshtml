@@ -1,0 +1,115 @@
+﻿@model AutoRental.Models.Car
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Car @Model.CarNo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CarNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheBrand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheBrand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mileage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mileage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Engine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Engine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxPower)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxPower) KM
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ABS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ABS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Doors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mass) kg
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDCar }) |
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Create PDF", "CreatePDF", new { id = Model.IDCar })
+</p>
